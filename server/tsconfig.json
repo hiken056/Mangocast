@@ -9,6 +9,9 @@
       "forceConsistentCasingInFileNames": true,
       "rootDir": "./src",
       "outDir": "./dist",
-      "baseUrl": "."
+      "baseUrl": ".",
+      "paths" : {
+        "#/*": ["./src/*"]
+      },
     }
   }
