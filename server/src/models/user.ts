@@ -1,6 +1,6 @@
 //interface
 
-import { ObjectId, Schema } from "mongoose";
+import { Model, ObjectId, Schema, model } from "mongoose";
 
 interface userDocument {
     name: string;
@@ -44,10 +44,14 @@ const userSchema = new Schema<userDocument>({
         ref: "Audio", 
     }],
     followers: [{
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,
+        ref: "User", 
     }],
     followings: [{
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,
+        ref: "User",
     }],
     tokens: [String],
-})
+}, {timestamps: true});
+
+export default model("User", userSchema) as Model<userDocument>
