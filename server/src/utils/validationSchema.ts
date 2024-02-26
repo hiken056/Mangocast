@@ -7,7 +7,7 @@ export const CreateUserSchema = yup.object().shape({
     .required("Name is missing!")
     .min(3, "Name is too short!")
     .max(20, "Name is too long!"),
-  emai: yup.string().required("Email is missing!").email("Invalid email!"),
+  email: yup.string().required("Email is missing!").email("Invalid email!"),
   password: yup
     .string()
     .trim()
@@ -19,5 +19,3 @@ export const CreateUserSchema = yup.object().shape({
     ),
 });
 
-
-// CreateUserSchema.validate()
