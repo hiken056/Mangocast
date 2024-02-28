@@ -1,11 +1,16 @@
+require('dotenv').config({ debug: true });
+console.log(process.env.MONGO_URI); // Log MONGO_URI to check if it's defined
+
 import mongoose from "mongoose";
 import { MONGO_URI } from "#/utils/variables";
 
+console.log(MONGO_URI);  // Log MONGO_URI to check if it's defined
+
 mongoose.set("strictQuery", true);
 mongoose
-  .connect('mongodb://127.0.0.1:27017/podcastApp')
+  .connect(MONGO_URI)
   .then(() => {
-    console.log("connection succesful to the server");
+    console.log("connection successful to the server");
   })
   .catch((err) => {
     console.log("connection failed to the server", err);
