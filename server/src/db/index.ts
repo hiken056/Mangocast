@@ -1,14 +1,15 @@
-require('dotenv').config({ debug: true });
-console.log(process.env.MONGO_URI); // Log MONGO_URI to check if it's defined
+// Manually set the environment variable
+process.env.MONGO_URI = 'mongodb://127.0.0.1:27017/podcastApp';
 
+// Log the value to check if it's set correctly
+console.log(process.env.MONGO_URI);
+
+// Continue with your code
 import mongoose from "mongoose";
-import { MONGO_URI } from "#/utils/variables";
-
-console.log(MONGO_URI);  // Log MONGO_URI to check if it's defined
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect(MONGO_URI)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("connection successful to the server");
   })
