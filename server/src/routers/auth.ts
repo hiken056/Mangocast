@@ -24,10 +24,11 @@ router.post(
   async (req: CreateUser, res) => {
     const { email, password, name } = req.body;
 
-    CreateUserSchema.validate({ email, password, name }).catch((error) => {});
+    CreateUserSchema.validate({ email, password, name }).catch((error) => {console.log(error);});
+    
 
-//    const user = await User.create({ name, email, password });
-  //  res.json({ user });
+   const user = await User.create({ name, email, password });
+   res.json({ user });
   }
 );
 
