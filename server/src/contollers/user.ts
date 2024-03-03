@@ -10,6 +10,7 @@ import { generateToken } from "#/utils/helper";
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
 
+
   const user = await User.create({ name, email, password });
 
   //send verification email
