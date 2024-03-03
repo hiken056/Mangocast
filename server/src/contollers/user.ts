@@ -11,14 +11,13 @@ export const create: RequestHandler = async (req: CreateUser, res) => {
   const user = await User.create({ name, email, password });
 
   //send verification email
-
   const transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: MAILTRAP_USER,
-      pass: MAILTRAP_PASS,
-    },
+      user: "2082065977c217",
+      pass: "a2bfbe64418593"
+    }
   });
 
 

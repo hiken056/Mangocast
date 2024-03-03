@@ -1,5 +1,5 @@
 
-import { MONGO_URI } from "#/utils/variables";
+import { MONGO_URI, MAILTRAP_PASS, MAILTRAP_USER } from "#/utils/variables";
 import mongoose from "mongoose";
 
 require('dotenv').config();
