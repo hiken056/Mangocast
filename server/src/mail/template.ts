@@ -1,19 +1,18 @@
 interface Options {
-    title: string;
-    message: string;
-    link: string;
-    banner: string;
-    logo: string;
-    btnTitle: string;
+  title: string;
+  message: string;
+  link: string;
+  logo: string;
+  banner: string;
+  btnTitle: string;
 }
 
-
 export const generateTemplate = (options: Options) => {
-    const {title, message, link, logo, banner, btnTitle} = options;
+  const { title, message, link, logo, banner, btnTitle } = options;
 
-    return `
-    <!DOCTYPE html>
-
+  return `
+      <!DOCTYPE html>
+    
     <html
       lang="en"
       xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -23,12 +22,6 @@ export const generateTemplate = (options: Options) => {
         <title></title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <!--[if mso
-          ]><xml
-            ><o:OfficeDocumentSettings
-              ><o:PixelsPerInch>96</o:PixelsPerInch
-              ><o:AllowPNG /></o:OfficeDocumentSettings></xml
-        ><![endif]-->
         <style>
           * {
             box-sizing: border-box;
@@ -61,10 +54,6 @@ export const generateTemplate = (options: Options) => {
             overflow: hidden;
           }
     
-          .image_block img + div {
-            display: none;
-          }
-    
           .menu_block.desktop_hide .menu-links span {
             mso-hide: all;
           }
@@ -83,8 +72,10 @@ export const generateTemplate = (options: Options) => {
               margin: 0 auto;
             }
     
-            .image_block div.fullWidth {
-              max-width: 100% !important;
+            .fullMobileWidth,
+            .image_block img.big,
+            .row-content {
+              width: 100% !important;
             }
     
             .menu-checkbox[type="checkbox"] ~ .menu-links {
@@ -116,10 +107,6 @@ export const generateTemplate = (options: Options) => {
     
             .mobile_hide {
               display: none;
-            }
-    
-            .row-content {
-              width: 100% !important;
             }
     
             .stack .column {
@@ -202,7 +189,6 @@ export const generateTemplate = (options: Options) => {
                             mso-table-rspace: 0pt;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -215,9 +201,9 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
+                                  padding-top: 5px;
+                                  padding-bottom: 5px;
                                   border-top: 0px;
                                   border-right: 0px;
                                   border-bottom: 0px;
@@ -226,7 +212,7 @@ export const generateTemplate = (options: Options) => {
                                 width="100%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
                                     height: 30px;
                                     line-height: 30px;
@@ -268,7 +254,6 @@ export const generateTemplate = (options: Options) => {
                             mso-table-rspace: 0pt;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -281,8 +266,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -292,10 +275,10 @@ export const generateTemplate = (options: Options) => {
                                 width="33.333333333333336%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -309,8 +292,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -323,7 +304,7 @@ export const generateTemplate = (options: Options) => {
                                   border="0"
                                   cellpadding="0"
                                   cellspacing="0"
-                                  class="image_block block-1"
+                                  class="image_block block-2"
                                   role="presentation"
                                   style="
                                     mso-table-lspace: 0pt;
@@ -338,6 +319,8 @@ export const generateTemplate = (options: Options) => {
                                         width: 100%;
                                         padding-right: 0px;
                                         padding-left: 0px;
+                                        padding-top: 5px;
+                                        padding-bottom: 5px;
                                       "
                                     >
                                       <div
@@ -345,20 +328,19 @@ export const generateTemplate = (options: Options) => {
                                         class="alignment"
                                         style="line-height: 10px"
                                       >
-                                        <div style="max-width: 145.067px">
-                                          <img
-                                            alt="Company Logo"
-                                            src="images/logo_password_header.png"
-                                            style="
-                                              display: block;
-                                              height: auto;
-                                              border: 0;
-                                              width: 100%;
-                                            "
-                                            title="Company Logo"
-                                            width="145.067"
-                                          />
-                                        </div>
+                                        <img
+                                          alt="Company Logo"
+                                          src="${logo}"
+                                          style="
+                                            display: block;
+                                            height: auto;
+                                            border: 0;
+                                            width: 147px;
+                                            max-width: 100%;
+                                          "
+                                          title="Company Logo"
+                                          width="147"
+                                        />
                                       </div>
                                     </td>
                                   </tr>
@@ -371,8 +353,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -382,10 +362,10 @@ export const generateTemplate = (options: Options) => {
                                 width="33.333333333333336%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -424,7 +404,6 @@ export const generateTemplate = (options: Options) => {
                             mso-table-rspace: 0pt;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -437,9 +416,9 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
+                                  padding-top: 5px;
+                                  padding-bottom: 5px;
                                   border-top: 0px;
                                   border-right: 0px;
                                   border-bottom: 0px;
@@ -448,7 +427,7 @@ export const generateTemplate = (options: Options) => {
                                 width="100%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
                                     height: 10px;
                                     line-height: 10px;
@@ -465,98 +444,7 @@ export const generateTemplate = (options: Options) => {
                     </tr>
                   </tbody>
                 </table>
-                <table
-                  align="center"
-                  border="0"
-                  cellpadding="0"
-                  cellspacing="0"
-                  class="row row-4"
-                  role="presentation"
-                  style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
-                  width="100%"
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        <table
-                          align="center"
-                          border="0"
-                          cellpadding="0"
-                          cellspacing="0"
-                          class="row-content stack"
-                          role="presentation"
-                          style="
-                            mso-table-lspace: 0pt;
-                            mso-table-rspace: 0pt;
-                            color: #000000;
-                            width: 680px;
-                            margin: 0 auto;
-                          "
-                          width="680"
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                class="column column-1"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  font-weight: 400;
-                                  text-align: left;
-                                  padding-top: 5px;
-                                  vertical-align: top;
-                                  border-top: 0px;
-                                  border-right: 0px;
-                                  border-bottom: 0px;
-                                  border-left: 0px;
-                                "
-                                width="100%"
-                              >
-                                <table
-                                  border="0"
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  class="image_block block-1"
-                                  role="presentation"
-                                  style="
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
-                                  "
-                                  width="100%"
-                                >
-                                  <tr>
-                                    <td class="pad" style="width: 100%">
-                                      <div
-                                        align="center"
-                                        class="alignment"
-                                        style="line-height: 10px"
-                                      >
-                                        <div style="max-width: 680px">
-                                          <img
-                                            alt="Top round corners"
-                                            src="images/round_corner_top.png"
-                                            style="
-                                              display: block;
-                                              height: auto;
-                                              border: 0;
-                                              width: 100%;
-                                            "
-                                            title="Top round corners"
-                                            width="680"
-                                          />
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+    
                 <table
                   align="center"
                   border="0"
@@ -583,7 +471,6 @@ export const generateTemplate = (options: Options) => {
                             background-color: #ffffff;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -596,9 +483,9 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
+                                  padding-top: 5px;
+                                  padding-bottom: 5px;
                                   border-top: 0px;
                                   border-right: 0px;
                                   border-bottom: 0px;
@@ -625,37 +512,24 @@ export const generateTemplate = (options: Options) => {
                                         class="alignment"
                                         style="line-height: 10px"
                                       >
-                                        <div
-                                          class="fullWidth"
-                                          style="max-width: 374px"
-                                        >
-                                          <img
-                                            alt="Resetting Password"
-                                            src="images/password_reset.png"
-                                            style="
-                                              display: block;
-                                              height: auto;
-                                              border: 0;
-                                              width: 100%;
-                                            "
-                                            title="Resetting Password"
-                                            width="374"
-                                          />
-                                        </div>
+                                        <img
+                                          alt="Resetting Password"
+                                          class="fullMobileWidth"
+                                          src="${banner}"
+                                          style="
+                                            display: block;
+                                            height: auto;
+                                            border: 0;
+                                            width: 374px;
+                                            max-width: 100%;
+                                          "
+                                          title="Resetting Password"
+                                          width="374"
+                                        />
                                       </div>
                                     </td>
                                   </tr>
                                 </table>
-                                <div
-                                  class="spacer_block block-2"
-                                  style="
-                                    height: 35px;
-                                    line-height: 35px;
-                                    font-size: 1px;
-                                  "
-                                >
-                                   
-                                </div>
                                 <table
                                   border="0"
                                   cellpadding="0"
@@ -671,7 +545,11 @@ export const generateTemplate = (options: Options) => {
                                   <tr>
                                     <td
                                       class="pad"
-                                      style="text-align: center; width: 100%"
+                                      style="
+                                        text-align: center;
+                                        width: 100%;
+                                        padding-top: 35px;
+                                      "
                                     >
                                       <h1
                                         style="
@@ -687,10 +565,9 @@ export const generateTemplate = (options: Options) => {
                                           text-align: center;
                                           margin-top: 0;
                                           margin-bottom: 0;
-                                          mso-line-height-alt: 32.4px;
                                         "
                                       >
-                                        <strong>Forgot Your Password?</strong>
+                                        <strong>${title}</strong>
                                       </h1>
                                     </td>
                                   </tr>
@@ -729,7 +606,6 @@ export const generateTemplate = (options: Options) => {
                             background-color: #ffffff;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -742,8 +618,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -753,10 +627,10 @@ export const generateTemplate = (options: Options) => {
                                 width="16.666666666666668%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -770,8 +644,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -784,7 +656,7 @@ export const generateTemplate = (options: Options) => {
                                   border="0"
                                   cellpadding="0"
                                   cellspacing="0"
-                                  class="paragraph_block block-1"
+                                  class="text_block block-2"
                                   role="presentation"
                                   style="
                                     mso-table-lspace: 0pt;
@@ -800,49 +672,43 @@ export const generateTemplate = (options: Options) => {
                                         padding-bottom: 10px;
                                         padding-left: 20px;
                                         padding-right: 10px;
-                                        padding-top: 10px;
+                                        padding-top: 15px;
                                       "
                                     >
-                                      <div
-                                        style="
-                                          color: #848484;
-                                          font-family: Arial, Helvetica Neue,
-                                            Helvetica, sans-serif;
-                                          font-size: 14px;
-                                          line-height: 180%;
-                                          text-align: center;
-                                          mso-line-height-alt: 25.2px;
-                                        "
-                                      >
-                                        <p
-                                          style="margin: 0; word-break: break-word"
+                                      <div style="font-family: sans-serif">
+                                        <div
+                                          class=""
+                                          style="
+                                            font-size: 12px;
+                                            mso-line-height-alt: 21.6px;
+                                            color: #848484;
+                                            line-height: 1.8;
+                                            font-family: Arial, Helvetica Neue,
+                                              Helvetica, sans-serif;
+                                          "
                                         >
-                                          <span
-                                            >Lorem ipsum dolor sit amet,
-                                            consectetuer adipiscing elit. Aenean
-                                            commodo ligula eget dolor. Aenean
-                                            massa.</span
+                                          <p
+                                            style="
+                                              margin: 0;
+                                              font-size: 14px;
+                                              text-align: center;
+                                              mso-line-height-alt: 25.2px;
+                                            "
                                           >
-                                        </p>
+                                            <span style="font-size: 14px"
+                                              >${message}</span
+                                            >
+                                          </p>
+                                        </div>
                                       </div>
                                     </td>
                                   </tr>
                                 </table>
-                                <div
-                                  class="spacer_block block-2"
-                                  style="
-                                    height: 10px;
-                                    line-height: 10px;
-                                    font-size: 1px;
-                                  "
-                                >
-                                   
-                                </div>
                                 <table
                                   border="0"
-                                  cellpadding="10"
+                                  cellpadding="0"
                                   cellspacing="0"
-                                  class="button_block block-3"
+                                  class="button_block block-4"
                                   role="presentation"
                                   style="
                                     mso-table-lspace: 0pt;
@@ -851,16 +717,20 @@ export const generateTemplate = (options: Options) => {
                                   width="100%"
                                 >
                                   <tr>
-                                    <td class="pad">
+                                    <td
+                                      class="pad"
+                                      style="
+                                        padding-bottom: 35px;
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-top: 20px;
+                                        text-align: center;
+                                      "
+                                    >
                                       <div align="center" class="alignment">
-                                        <!--[if mso]>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="www.example.com" style="height:47px;width:162px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#101" fillcolor="#101">
-    <w:anchorlock/>
-    <v:textbox inset="0px,0px,0px,0px">
-    <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px">
-    <!
+                                        <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="www.example.com" style="height:44px;width:160px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#101" fillcolor="#101"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px"><!
                                         [endif]--><a
-                                          href="www.example.com"
+                                          href="${link}"
                                           style="
                                             text-decoration: none;
                                             display: inline-block;
@@ -896,24 +766,15 @@ export const generateTemplate = (options: Options) => {
                                                 word-break: break-word;
                                                 line-height: 32px;
                                               "
-                                              >Reset Password</span
+                                              >${btnTitle}</span
                                             ></span
                                           ></a
-                                        >><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+                                        >
+                                        <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
                                       </div>
                                     </td>
                                   </tr>
                                 </table>
-                                <div
-                                  class="spacer_block block-4"
-                                  style="
-                                    height: 20px;
-                                    line-height: 20px;
-                                    font-size: 1px;
-                                  "
-                                >
-                                   
-                                </div>
                               </td>
                               <td
                                 class="column column-3"
@@ -922,8 +783,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -933,10 +792,10 @@ export const generateTemplate = (options: Options) => {
                                 width="16.666666666666668%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -950,464 +809,7 @@ export const generateTemplate = (options: Options) => {
                     </tr>
                   </tbody>
                 </table>
-                <table
-                  align="center"
-                  border="0"
-                  cellpadding="0"
-                  cellspacing="0"
-                  class="row row-7"
-                  role="presentation"
-                  style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
-                  width="100%"
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        <table
-                          align="center"
-                          border="0"
-                          cellpadding="0"
-                          cellspacing="0"
-                          class="row-content stack"
-                          role="presentation"
-                          style="
-                            mso-table-lspace: 0pt;
-                            mso-table-rspace: 0pt;
-                            color: #000000;
-                            width: 680px;
-                            margin: 0 auto;
-                          "
-                          width="680"
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                class="column column-1"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  font-weight: 400;
-                                  text-align: left;
-                                  vertical-align: top;
-                                  border-top: 0px;
-                                  border-right: 0px;
-                                  border-bottom: 0px;
-                                  border-left: 0px;
-                                "
-                                width="100%"
-                              >
-                                <table
-                                  border="0"
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  class="image_block block-1"
-                                  role="presentation"
-                                  style="
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
-                                  "
-                                  width="100%"
-                                >
-                                  <tr>
-                                    <td class="pad" style="width: 100%">
-                                      <div
-                                        align="center"
-                                        class="alignment"
-                                        style="line-height: 10px"
-                                      >
-                                        <div style="max-width: 679px">
-                                          <img
-                                            alt="Bottom round corners"
-                                            src="images/round_corner_bottom.png"
-                                            style="
-                                              display: block;
-                                              height: auto;
-                                              border: 0;
-                                              width: 100%;
-                                            "
-                                            title="Bottom round corners"
-                                            width="679"
-                                          />
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table
-                  align="center"
-                  border="0"
-                  cellpadding="0"
-                  cellspacing="0"
-                  class="row row-8"
-                  role="presentation"
-                  style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
-                  width="100%"
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        <table
-                          align="center"
-                          border="0"
-                          cellpadding="0"
-                          cellspacing="0"
-                          class="row-content stack"
-                          role="presentation"
-                          style="
-                            mso-table-lspace: 0pt;
-                            mso-table-rspace: 0pt;
-                            color: #000000;
-                            width: 680px;
-                            margin: 0 auto;
-                          "
-                          width="680"
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                class="column column-1"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  font-weight: 400;
-                                  text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
-                                  vertical-align: top;
-                                  border-top: 0px;
-                                  border-right: 0px;
-                                  border-bottom: 0px;
-                                  border-left: 0px;
-                                "
-                                width="100%"
-                              >
-                                <div
-                                  class="spacer_block block-1"
-                                  style="
-                                    height: 20px;
-                                    line-height: 20px;
-                                    font-size: 1px;
-                                  "
-                                >
-                                   
-                                </div>
-                                <table
-                                  border="0"
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  class="social_block block-2"
-                                  role="presentation"
-                                  style="
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
-                                  "
-                                  width="100%"
-                                >
-                                  <tr>
-                                    <td
-                                      class="pad"
-                                      style="
-                                        padding-bottom: 15px;
-                                        padding-left: 10px;
-                                        padding-right: 10px;
-                                        padding-top: 10px;
-                                        text-align: center;
-                                      "
-                                    >
-                                      <div align="center" class="alignment">
-                                        <table
-                                          border="0"
-                                          cellpadding="0"
-                                          cellspacing="0"
-                                          class="social-table"
-                                          role="presentation"
-                                          style="
-                                            mso-table-lspace: 0pt;
-                                            mso-table-rspace: 0pt;
-                                            display: inline-block;
-                                          "
-                                          width="144px"
-                                        >
-                                          <tr>
-                                            <td style="padding: 0 2px 0 2px">
-                                              <a
-                                                href="https://www.facebook.com"
-                                                target="_blank"
-                                                ><img
-                                                  alt="Facebook"
-                                                  height="32"
-                                                  src="images/facebook2x.png"
-                                                  style="
-                                                    display: block;
-                                                    height: auto;
-                                                    border: 0;
-                                                  "
-                                                  title="facebook"
-                                                  width="32"
-                                              /></a>
-                                            </td>
-                                            <td style="padding: 0 2px 0 2px">
-                                              <a
-                                                href="https://www.twitter.com"
-                                                target="_blank"
-                                                ><img
-                                                  alt="Twitter"
-                                                  height="32"
-                                                  src="images/twitter2x.png"
-                                                  style="
-                                                    display: block;
-                                                    height: auto;
-                                                    border: 0;
-                                                  "
-                                                  title="twitter"
-                                                  width="32"
-                                              /></a>
-                                            </td>
-                                            <td style="padding: 0 2px 0 2px">
-                                              <a
-                                                href="https://www.linkedin.com"
-                                                target="_blank"
-                                                ><img
-                                                  alt="Linkedin"
-                                                  height="32"
-                                                  src="images/linkedin2x.png"
-                                                  style="
-                                                    display: block;
-                                                    height: auto;
-                                                    border: 0;
-                                                  "
-                                                  title="linkedin"
-                                                  width="32"
-                                              /></a>
-                                            </td>
-                                            <td style="padding: 0 2px 0 2px">
-                                              <a
-                                                href="https://www.instagram.com"
-                                                target="_blank"
-                                                ><img
-                                                  alt="Instagram"
-                                                  height="32"
-                                                  src="images/instagram2x.png"
-                                                  style="
-                                                    display: block;
-                                                    height: auto;
-                                                    border: 0;
-                                                  "
-                                                  title="instagram"
-                                                  width="32"
-                                              /></a>
-                                            </td>
-                                          </tr>
-                                        </table>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </table>
-                                <table
-                                  border="0"
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  class="menu_block block-3"
-                                  role="presentation"
-                                  style="
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
-                                  "
-                                  width="100%"
-                                >
-                                  <tr>
-                                    <td
-                                      class="pad"
-                                      style="
-                                        color: #101010;
-                                        font-family: inherit;
-                                        font-size: 14px;
-                                        text-align: center;
-                                      "
-                                    >
-                                      <table
-                                        border="0"
-                                        cellpadding="0"
-                                        cellspacing="0"
-                                        role="presentation"
-                                        style="
-                                          mso-table-lspace: 0pt;
-                                          mso-table-rspace: 0pt;
-                                        "
-                                        width="100%"
-                                      >
-                                        <tr>
-                                          <td
-                                            class="alignment"
-                                            style="
-                                              text-align: center;
-                                              font-size: 0px;
-                                            "
-                                          >
-                                            <!--[if !mso
-                                            ]><!--><input
-                                              class="menu-checkbox"
-                                              id="memu-r7c0m2"
-                                              style="
-                                                display: none !important;
-                                                max-height: 0;
-                                                visibility: hidden;
-                                              "
-                                              type="checkbox"
-                                            /><!--<![endif]-->
-                                            <div
-                                              class="menu-trigger"
-                                              style="
-                                                display: none;
-                                                max-height: 0px;
-                                                max-width: 0px;
-                                                font-size: 0px;
-                                                overflow: hidden;
-                                              "
-                                            >
-                                              <label
-                                                class="menu-label"
-                                                for="memu-r7c0m2"
-                                                style="
-                                                  height: 36px;
-                                                  width: 36px;
-                                                  display: inline-block;
-                                                  cursor: pointer;
-                                                  mso-hide: all;
-                                                  user-select: none;
-                                                  align: center;
-                                                  text-align: center;
-                                                  color: #ffffff;
-                                                  text-decoration: none;
-                                                  background-color: #000000;
-                                                  border-radius: 0;
-                                                "
-                                                ><span
-                                                  class="menu-open"
-                                                  style="
-                                                    mso-hide: all;
-                                                    font-size: 26px;
-                                                    line-height: 31.5px;
-                                                  "
-                                                  >☰</span
-                                                ><span
-                                                  class="menu-close"
-                                                  style="
-                                                    display: none;
-                                                    mso-hide: all;
-                                                    font-size: 26px;
-                                                    line-height: 36px;
-                                                  "
-                                                  >✕</span
-                                                ></label
-                                              >
-                                            </div>
-                                            <div class="menu-links">
-                                              <!--[if mso]><table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" style=""><tr style="text-align:center;"><!
-                                              [endif]-->[endif]--><!--[if mso]><td style="padding-top:5px;padding-right:15px;padding-bottom:5px;padding-left:15px"><!
-                                              [endif]--><a
-                                                href="www.example.com"
-                                                style="
-                                                  mso-hide: false;
-                                                  padding-top: 5px;
-                                                  padding-bottom: 5px;
-                                                  padding-left: 15px;
-                                                  padding-right: 15px;
-                                                  display: inline-block;
-                                                  color: #101010;
-                                                  font-family: Arial, Helvetica Neue,
-                                                    Helvetica, sans-serif;
-                                                  font-size: 14px;
-                                                  text-decoration: none;
-                                                  letter-spacing: normal;
-                                                "
-                                                target="_self"
-                                                >Unsubscribe</a
-                                              >><!--[if mso]></td><!
-                                              [endif]-->[endif]--><!--[if mso]><td style="padding-top:5px;padding-right:15px;padding-bottom:5px;padding-left:15px"><!
-                                              [endif]--><a
-                                                href="www.example.com"
-                                                style="
-                                                  mso-hide: false;
-                                                  padding-top: 5px;
-                                                  padding-bottom: 5px;
-                                                  padding-left: 15px;
-                                                  padding-right: 15px;
-                                                  display: inline-block;
-                                                  color: #101010;
-                                                  font-family: Arial, Helvetica Neue,
-                                                    Helvetica, sans-serif;
-                                                  font-size: 14px;
-                                                  text-decoration: none;
-                                                  letter-spacing: normal;
-                                                "
-                                                target="_self"
-                                                >Help</a
-                                              >><!--[if mso]></td><!
-                                              [endif]-->[endif]--><!--[if mso]><td style="padding-top:5px;padding-right:15px;padding-bottom:5px;padding-left:15px"><!
-                                              [endif]--><a
-                                                href="www.example.com"
-                                                style="
-                                                  mso-hide: false;
-                                                  padding-top: 5px;
-                                                  padding-bottom: 5px;
-                                                  padding-left: 15px;
-                                                  padding-right: 15px;
-                                                  display: inline-block;
-                                                  color: #101010;
-                                                  font-family: Arial, Helvetica Neue,
-                                                    Helvetica, sans-serif;
-                                                  font-size: 14px;
-                                                  text-decoration: none;
-                                                  letter-spacing: normal;
-                                                "
-                                                target="_self"
-                                                >Login</a
-                                              >><!--[if mso]></td><!
-                                              [endif]-->[endif]--><!--[if mso]><td style="padding-top:5px;padding-right:15px;padding-bottom:5px;padding-left:15px"><!
-                                              [endif]--><a
-                                                href="www.example.com"
-                                                style="
-                                                  mso-hide: false;
-                                                  padding-top: 5px;
-                                                  padding-bottom: 5px;
-                                                  padding-left: 15px;
-                                                  padding-right: 15px;
-                                                  display: inline-block;
-                                                  color: #101010;
-                                                  font-family: Arial, Helvetica Neue,
-                                                    Helvetica, sans-serif;
-                                                  font-size: 14px;
-                                                  text-decoration: none;
-                                                  letter-spacing: normal;
-                                                "
-                                                target="_self"
-                                                >Privacy</a
-                                              >><!--[if mso]></td><!
-                                              [endif]-->[endif]--><!--[if mso]></tr></table><![endif]-->
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+    
                 <table
                   align="center"
                   border="0"
@@ -1433,7 +835,6 @@ export const generateTemplate = (options: Options) => {
                             mso-table-rspace: 0pt;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -1446,8 +847,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -1457,10 +856,10 @@ export const generateTemplate = (options: Options) => {
                                 width="16.666666666666668%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -1474,8 +873,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -1485,10 +882,10 @@ export const generateTemplate = (options: Options) => {
                                 width="66.66666666666667%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 35px;
-                                    line-height: 35px;
+                                    height: 45px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -1502,8 +899,6 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
                                   border-top: 0px;
                                   border-right: 0px;
@@ -1513,10 +908,10 @@ export const generateTemplate = (options: Options) => {
                                 width="16.666666666666668%"
                               >
                                 <div
-                                  class="spacer_block block-1"
+                                  class="spacer_block"
                                   style="
-                                    height: 0px;
-                                    line-height: 0px;
+                                    height: 10px;
+                                    line-height: 5px;
                                     font-size: 1px;
                                   "
                                 >
@@ -1537,11 +932,7 @@ export const generateTemplate = (options: Options) => {
                   cellspacing="0"
                   class="row row-10"
                   role="presentation"
-                  style="
-                    mso-table-lspace: 0pt;
-                    mso-table-rspace: 0pt;
-                    background-color: #ffffff;
-                  "
+                  style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
                   width="100%"
                 >
                   <tbody>
@@ -1557,10 +948,8 @@ export const generateTemplate = (options: Options) => {
                           style="
                             mso-table-lspace: 0pt;
                             mso-table-rspace: 0pt;
-                            background-color: #ffffff;
                             color: #000000;
                             width: 680px;
-                            margin: 0 auto;
                           "
                           width="680"
                         >
@@ -1573,9 +962,9 @@ export const generateTemplate = (options: Options) => {
                                   mso-table-rspace: 0pt;
                                   font-weight: 400;
                                   text-align: left;
-                                  padding-bottom: 5px;
-                                  padding-top: 5px;
                                   vertical-align: top;
+                                  padding-top: 5px;
+                                  padding-bottom: 5px;
                                   border-top: 0px;
                                   border-right: 0px;
                                   border-bottom: 0px;
@@ -1600,8 +989,8 @@ export const generateTemplate = (options: Options) => {
                                       class="pad"
                                       style="
                                         vertical-align: middle;
-                                        color: #1e0e4b;
-                                        font-family: 'Inter', sans-serif;
+                                        color: #9d9d9d;
+                                        font-family: inherit;
                                         font-size: 15px;
                                         padding-bottom: 5px;
                                         padding-top: 5px;
@@ -1626,7 +1015,7 @@ export const generateTemplate = (options: Options) => {
                                               text-align: center;
                                             "
                                           >
-                                            <!--[if vml]><table align="center" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                                            <!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
                                             <!--[if !vml]><!-->
                                             <table
                                               cellpadding="0"
@@ -1643,58 +1032,6 @@ export const generateTemplate = (options: Options) => {
                                               "
                                             >
                                               <!--<![endif]-->
-                                              <tr>
-                                                <td
-                                                  style="
-                                                    vertical-align: middle;
-                                                    text-align: center;
-                                                    padding-top: 5px;
-                                                    padding-bottom: 5px;
-                                                    padding-left: 5px;
-                                                    padding-right: 6px;
-                                                  "
-                                                >
-                                                  <a
-                                                    href="http://designedwithbeefree.com/"
-                                                    style="text-decoration: none"
-                                                    target="_blank"
-                                                    ><img
-                                                      align="center"
-                                                      alt="Beefree Logo"
-                                                      class="icon"
-                                                      height="32"
-                                                      src="images/Beefree-logo.png"
-                                                      style="
-                                                        display: block;
-                                                        height: auto;
-                                                        margin: 0 auto;
-                                                        border: 0;
-                                                      "
-                                                      width="34"
-                                                  /></a>
-                                                </td>
-                                                <td
-                                                  style="
-                                                    font-family: 'Inter', sans-serif;
-                                                    font-size: 15px;
-                                                    font-weight: undefined;
-                                                    color: #1e0e4b;
-                                                    vertical-align: middle;
-                                                    letter-spacing: undefined;
-                                                    text-align: center;
-                                                  "
-                                                >
-                                                  <a
-                                                    href="http://designedwithbeefree.com/"
-                                                    style="
-                                                      color: #1e0e4b;
-                                                      text-decoration: none;
-                                                    "
-                                                    target="_blank"
-                                                    >Designed with Beefree</a
-                                                  >
-                                                </td>
-                                              </tr>
                                             </table>
                                           </td>
                                         </tr>
@@ -1714,9 +1051,8 @@ export const generateTemplate = (options: Options) => {
             </tr>
           </tbody>
         </table>
-        <!-- End -->
       </body>
     </html>
     
-    `
-}
+      `;
+};
