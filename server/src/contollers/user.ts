@@ -7,6 +7,8 @@ import EmailVerificationToken from "#/models/emailVerificationToken";
 import { emailVerificationBody } from "#/utils/validationSchema";
 import emailVerificationToken from "#/models/emailVerificationToken";
 import { isValidObjectId } from "mongoose";
+import PasswordResetToken from "#/models/passwordResetToken";
+import crypto from 'crypto'
 
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
@@ -74,4 +76,30 @@ export const sendReVerificationToken: RequestHandler = async (req, res) => {
   });
 
   res.json({message: "Please check your email!"})
+};
+
+
+export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ error: "Account not found!" });
+  }
+
+  //generate link
+  //https://Mangocast.com/reset-password?token=asdkjawdkhasck24afh&userId=29aifh2aglsg
+
+  const token = crypto.randomBytes(36).toString('hex');
+
+  await PasswordResetToken.create({
+    owner: user?._id,
+    token
+  })
+
+  const PASSWORD_RESET_LINK='https://Mangocast.com/reset-password'
+  const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`
+
+  res.json({resetLink});
 };
