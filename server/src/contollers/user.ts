@@ -4,7 +4,7 @@ import User from "#/models/user";
 import { generateToken } from "#/utils/helper";
 import { sendForgetPasswordLink, sendVerificationMail } from "#/utils/mail";
 import EmailVerificationToken from "#/models/emailVerificationToken";
-import { emailVerificationBody } from "#/utils/validationSchema";
+import { TokenAndIDValidation } from "#/utils/validationSchema";
 import emailVerificationToken from "#/models/emailVerificationToken";
 import { isValidObjectId } from "mongoose";
 import PasswordResetToken from "#/models/passwordResetToken";
@@ -104,4 +104,24 @@ export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
   sendForgetPasswordLink({ email: user.email, link: resetLink });
 
   res.json({ message: "Check your registerd mail!" });
+};
+
+export const isValidPassResetToken: RequestHandler = async (req, res) => {
+  const { token, userId } = req.body;
+
+  const resetToken = await PasswordResetToken.findOne({ owner: userId });
+  if (!resetToken) {
+    return res
+      .status(403)
+      .json({ error: "Unathorized access, invalid token!" });
+  }
+
+  const matched = await resetToken.compareToken(token);
+  if (!matched) {
+    return res
+      .status(403)
+      .json({ error: "Unathorized access, invalid token!" });
+  }
+
+  res.json({ message: "Your token is valid!" });
 };
