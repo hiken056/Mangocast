@@ -2,13 +2,13 @@ import { RequestHandler } from "express";
 import { CreateUser, VerifyEmailRequest } from "#/@types/user";
 import User from "#/models/user";
 import { generateToken } from "#/utils/helper";
-import { sendVerificationMail } from "#/utils/mail";
+import { sendForgetPasswordLink, sendVerificationMail } from "#/utils/mail";
 import EmailVerificationToken from "#/models/emailVerificationToken";
 import { emailVerificationBody } from "#/utils/validationSchema";
 import emailVerificationToken from "#/models/emailVerificationToken";
 import { isValidObjectId } from "mongoose";
 import PasswordResetToken from "#/models/passwordResetToken";
-import crypto from 'crypto'
+import crypto from "crypto";
 
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
@@ -75,9 +75,8 @@ export const sendReVerificationToken: RequestHandler = async (req, res) => {
     userId: user?._id.toString(),
   });
 
-  res.json({message: "Please check your email!"})
+  res.json({ message: "Please check your email!" });
 };
-
 
 export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
   const { email } = req.body;
@@ -90,16 +89,19 @@ export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
 
   //generate link
   //https://Mangocast.com/reset-password?token=asdkjawdkhasck24afh&userId=29aifh2aglsg
+  await PasswordResetToken.findOneAndDelete({ owner: user._id });
 
-  const token = crypto.randomBytes(36).toString('hex');
+  const token = crypto.randomBytes(36).toString("hex");
 
   await PasswordResetToken.create({
     owner: user?._id,
-    token
-  })
+    token,
+  });
 
-  const PASSWORD_RESET_LINK='https://Mangocast.com/reset-password'
-  const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`
+  const PASSWORD_RESET_LINK = "https://Mangocast.com/reset-password";
+  const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`;
 
-  res.json({resetLink});
+  sendForgetPasswordLink({ email: user.email, link: resetLink });
+
+  res.json({ message: "Check your registerd mail!" });
 };
