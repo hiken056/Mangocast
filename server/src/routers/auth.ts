@@ -3,6 +3,7 @@ import {
   generateForgetPasswordLink,
   grantValid,
   sendReVerificationToken,
+  updatePassword,
   verifyEmail,
 } from "#/contollers/user";
 import { isValidPassResetToken } from "#/middleware/auth";
@@ -10,8 +11,8 @@ import { validate } from "#/middleware/validator";
 import {
   CreateUserSchema,
   TokenAndIDValidation,
+  UpdatePasswordSchema,
 } from "#/utils/validationSchema";
-import { verify } from "crypto";
 import { Router } from "express";
 
 const router = Router();
@@ -25,6 +26,13 @@ router.post(
   validate(TokenAndIDValidation),
   isValidPassResetToken,
   grantValid
+);
+
+router.post(
+  "/update-password",
+  validate(UpdatePasswordSchema),
+  isValidPassResetToken,
+  updatePassword
 );
 
 export default router;

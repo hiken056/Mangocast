@@ -113,3 +113,36 @@ transport.sendMail({
   ],
 });
 };
+
+
+export const sendPassResetSuccessEmail = async (name: string, email: string) => {
+  const transport = generateMailTransporter()
+
+const message = `Dear ${name} we just updated your new password. You can now sing in with your new password!`
+transport.sendMail({
+  to: email,
+  from: "Mangocast@gmail.com",
+  subject: "Password Reset Successfully",
+  html: generateTemplate({
+    title: "Password Reset Successfully",
+    message,
+    logo: "cid:logo",
+    banner: "cid:forget_password",
+    link: "https://Mangocast.com/sign-in",
+    btnTitle: "Log in",
+  }),
+  attachments: [
+    {
+      filename: "logo.png",
+      path: path.join(__dirname, "../mail/logo.png"),
+      cid: "logo",
+    },
+    {
+      filename: "forget_password.png",
+      path: path.join(__dirname, "../mail/forget_password.png"),
+      cid: "forget_password",
+    },
+  ],
+});
+};
+
