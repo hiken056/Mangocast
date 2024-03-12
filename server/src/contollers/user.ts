@@ -99,7 +99,7 @@ export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
     token,
   });
 
-  const PASSWORD_RESET_LINK = "https://Mangocast.com/reset-password";
+  const PASSWORD_RESET_LINK = "http://localhost:8989/reset-password.html";
   const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`;
 
   sendForgetPasswordLink({ email: user.email, link: resetLink });
