@@ -112,6 +112,3 @@ const handleSubmit = async (evt) => {
 };
 
 form.addEventListener("submit", handleSubmit);
-
-//https://mangocast.com/sign-in
-//https://mangocast.com/reset-password?token=64e4db71f9b72fd13fe708e929c36dfe7bf942122209a78572584fc5248a201044866de5&userId=
