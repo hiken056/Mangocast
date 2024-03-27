@@ -1,8 +1,7 @@
-// Import necessary types and functions
-import { Model, ObjectId, Schema, model } from "mongoose";
+import { Model, model, ObjectId, Schema } from "mongoose";
 import { hash, compare } from "bcrypt";
 
-// Define interface for document and methods
+// interface (typescript)
 interface EmailVerificationTokenDocument {
   owner: ObjectId;
   token: string;
@@ -13,10 +12,11 @@ interface Methods {
   compareToken(token: string): Promise<boolean>;
 }
 
-// Expire token after 1h
+// expire them after 1 hrs
+
 const emailVerificationTokenSchema = new Schema<
   EmailVerificationTokenDocument,
-  Model<EmailVerificationTokenDocument>,
+  {},
   Methods
 >({
   owner: {
@@ -30,29 +30,26 @@ const emailVerificationTokenSchema = new Schema<
   },
   createdAt: {
     type: Date,
-    expires: 3600, // expires after 1h
-    default: Date.now,
+    expires: 3600, // 60 min * 60 sec = 3600s
+    default: Date.now(),
   },
 });
 
-// Hash the token before saving
 emailVerificationTokenSchema.pre("save", async function (next) {
+  // hash the token
   if (this.isModified("token")) {
     this.token = await hash(this.token, 10);
   }
+
   next();
 });
 
-// Define method to compare tokens
-emailVerificationTokenSchema.methods.compareToken = async function (
-  token: string
-): Promise<boolean> {
+emailVerificationTokenSchema.methods.compareToken = async function (token) {
   const result = await compare(token, this.token);
   return result;
 };
 
-// Export the model
 export default model(
   "EmailVerificationToken",
   emailVerificationTokenSchema
-) as Model<EmailVerificationTokenDocument, Model<EmailVerificationTokenDocument>, Methods>;
+) as Model<EmailVerificationTokenDocument, {}, Methods>;

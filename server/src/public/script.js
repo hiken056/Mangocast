@@ -17,7 +17,7 @@ container.style.display = "none";
 
 let token, userId;
 const passRegex =
-  /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])[a-zA-Z\d!@#\$%\^&\*]+$/;
 
 window.addEventListener("DOMContentLoaded", async () => {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -50,13 +50,14 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 const displayError = (errorMessage) => {
-  //remove if there is there any succes message
+  // first we need to remove if there is any success message.
   success.style.display = "none";
   error.innerText = errorMessage;
   error.style.display = "block";
 };
 
 const displaySuccess = (successMessage) => {
+  // first we need to remove if there is any error message.
   error.style.display = "none";
   success.innerText = successMessage;
   success.style.display = "block";
@@ -64,28 +65,28 @@ const displaySuccess = (successMessage) => {
 
 const handleSubmit = async (evt) => {
   evt.preventDefault();
-  //validate
-
+  // validate
   if (!password.value.trim()) {
-    //render error
+    // render error
     return displayError("Password is missing!");
   }
 
   if (!passRegex.test(password.value)) {
-    //render error
+    // render error
     return displayError(
-      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+      "Password is too simple, use alpha numeric with special characters!"
     );
   }
 
-  if (password.value != confirmPassword.value) {
-    //render error
-    return displayError("Passwords do not match!");
+  if (password.value !== confirmPassword.value) {
+    // render error
+    return displayError("Password do not match!");
   }
 
-  button.disable = true;
+  button.disabled = true;
   button.innerText = "Please wait...";
 
+  // handle the submit
   const res = await fetch("/auth/update-password", {
     method: "POST",
     headers: {
@@ -98,7 +99,7 @@ const handleSubmit = async (evt) => {
     }),
   });
 
-  button.disable = false;
+  button.disabled = false;
   button.innerText = "Reset Password";
 
   if (!res.ok) {
@@ -106,7 +107,9 @@ const handleSubmit = async (evt) => {
     return displayError(error);
   }
 
-  displaySuccess("Your password has been reseted successfuly!");
+  displaySuccess("Your password is resets successfully!");
+
+  // resetting the form
   password.value = "";
   confirmPassword.value = "";
 };

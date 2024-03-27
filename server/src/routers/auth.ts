@@ -5,7 +5,7 @@ import {
   sendReVerificationToken,
   updatePassword,
   verifyEmail,
-} from "#/contollers/user";
+} from "#/controllers/user";
 import { isValidPassResetToken } from "#/middleware/auth";
 import { validate } from "#/middleware/validator";
 import {
@@ -27,7 +27,6 @@ router.post(
   isValidPassResetToken,
   grantValid
 );
-
 router.post(
   "/update-password",
   validate(UpdatePasswordSchema),
@@ -36,4 +35,3 @@ router.post(
 );
 
 export default router;
-//

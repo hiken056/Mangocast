@@ -1,19 +1,15 @@
-
-import { MONGO_URI, MAILTRAP_PASS, MAILTRAP_USER, VERIFICATION_EMAIL } from "#/utils/variables";
 import mongoose from "mongoose";
+import { MONGO_URI } from "#/utils/variables";
 
 require('dotenv').config();
-
-// console.log(MAILTRAP_PASS);
-// console.log(MAILTRAP_USER);
-// console.log(VERIFICATION_EMAIL);
+console.log(MONGO_URI);
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect(MONGO_URI)
+  .connect("mongodb://localhost:27017/Mangocast" as string)
   .then(() => {
-    console.log("connection successful to the server");
+    console.log("db is connected");
   })
   .catch((err) => {
-    console.log("connection failed to the server", err);
+    console.log("db connection failed: ", err);
   });

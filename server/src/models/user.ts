@@ -1,9 +1,8 @@
-//interface
-
 import { compare, hash } from "bcrypt";
-import { Model, ObjectId, Schema, model } from "mongoose";
+import { Model, model, ObjectId, Schema } from "mongoose";
 
-interface userDocument {
+// interface (typescript)
+interface UserDocument {
   name: string;
   email: string;
   password: string;
@@ -14,12 +13,11 @@ interface userDocument {
   followers: ObjectId[];
   followings: ObjectId[];
 }
-
 interface Methods {
   comparePassword(password: string): Promise<boolean>;
 }
 
-const userSchema = new Schema<userDocument, {}, Methods>(
+const userSchema = new Schema<UserDocument, {}, Methods>(
   {
     name: {
       type: String,
@@ -69,16 +67,17 @@ const userSchema = new Schema<userDocument, {}, Methods>(
 );
 
 userSchema.pre("save", async function (next) {
+  // hash the token
   if (this.isModified("password")) {
     this.password = await hash(this.password, 10);
   }
+
   next();
 });
 
-// Define method to compare tokens
 userSchema.methods.comparePassword = async function (password) {
   const result = await compare(password, this.password);
   return result;
 };
 
-export default model("User", userSchema) as Model<userDocument, {}, Methods>;
+export default model("User", userSchema) as Model<UserDocument, {}, Methods>;

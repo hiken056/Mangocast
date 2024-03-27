@@ -8,40 +8,49 @@ export const CreateUserSchema = yup.object().shape({
     .required("Name is missing!")
     .min(3, "Name is too short!")
     .max(20, "Name is too long!"),
-  email: yup.string().required("Email is missing!").email("Invalid email!"),
+  email: yup.string().required("Email is missing!").email("Invalid email id!"),
   password: yup
     .string()
     .trim()
     .required("Password is missing!")
     .min(8, "Password is too short!")
     .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])[a-zA-Z\d!@#\$%\^&\*]+$/,
+      "Password is too simple!"
     ),
 });
 
 export const TokenAndIDValidation = yup.object().shape({
   token: yup.string().trim().required("Invalid token!"),
-  userId: yup.string().transform(function (value) {
-    if (this.isType(value) && isValidObjectId(value)) return value;
-    return "";
-  }).required("Invalid userId!"),
+  userId: yup
+    .string()
+    .transform(function (value) {
+      if (this.isType(value) && isValidObjectId(value)) {
+        return value;
+      }
+      return "";
+    })
+    .required("Invalid userId!"),
 });
 
 export const UpdatePasswordSchema = yup.object().shape({
   token: yup.string().trim().required("Invalid token!"),
-  userId: yup.string().transform(function (value) {
-    if (this.isType(value) && isValidObjectId(value)) return value;
-    return "";
-  }).required("Invalid userId!"),
-  
+  userId: yup
+    .string()
+    .transform(function (value) {
+      if (this.isType(value) && isValidObjectId(value)) {
+        return value;
+      }
+      return "";
+    })
+    .required("Invalid userId!"),
   password: yup
     .string()
     .trim()
     .required("Password is missing!")
     .min(8, "Password is too short!")
     .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])[a-zA-Z\d!@#\$%\^&\*]+$/,
+      "Password is too simple!"
     ),
 });
