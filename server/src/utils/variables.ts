@@ -1,4 +1,4 @@
-const { env } = process as { env: { [key: string]: string } };
+const { env } = process as { env: { [key: string]: string | undefined } };
 
 export const {
   MONGO_URI,

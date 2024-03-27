@@ -1,12 +1,17 @@
-import mongoose from "mongoose";
 import { MONGO_URI } from "#/utils/variables";
+import mongoose from "mongoose";
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 
 require('dotenv').config();
 console.log(MONGO_URI);
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect("mongodb://localhost:27017/Mangocast" as string)
+  .connect(MONGO_URI as string)
   .then(() => {
     console.log("db is connected");
   })
