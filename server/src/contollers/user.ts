@@ -10,6 +10,7 @@ import { isValidObjectId } from "mongoose";
 import PasswordResetToken from "#/models/passwordResetToken";
 import crypto from "crypto";
 import { error } from "console";
+import { PASSWORD_RESET_LINK } from "#/utils/variables";
 
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
@@ -99,7 +100,6 @@ export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
     token,
   });
 
-  const PASSWORD_RESET_LINK = "http://localhost:8989/reset-password.html";
   const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`;
 
   sendForgetPasswordLink({ email: user.email, link: resetLink });
