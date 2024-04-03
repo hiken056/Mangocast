@@ -8,6 +8,22 @@ export interface CreateUser extends Request {
   };
 }
 
+declare global {
+  namespace Express {
+    interface Request{
+      user: {
+        id: any,
+        name: string,
+        email: string,
+        verified: boolean,
+        avatar?: string,
+        followers: number,
+        folowings: number,
+      }
+    }
+  }
+}
+
 export interface VerifyEmailRequest extends Request {
   body: {
     userId: string;
